@@ -19,8 +19,8 @@ class CoursesClient(object):
     def __init__(self, client):
         self.client = client
 
-    def all(self):
-        return self.client.get('course')
+    def all(self, count=100):
+        return self.client.get('course', params={'count': count})['results']
 
     def get(self, id):
         return self.client.get('course/{0}'.format(id))
