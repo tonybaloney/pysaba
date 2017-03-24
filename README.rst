@@ -1,37 +1,41 @@
 sabat
 ===========
 
-.. image:: https://img.shields.io/pypi/v/sabat.svg
-        :target: https://pypi.python.org/pypi/sabat
+.. image:: https://img.shields.io/pypi/v/pysaba.svg
+        :target: https://pypi.python.org/pypi/pysaba
 
-.. image:: https://img.shields.io/travis/tonybaloney/sabat.svg
-        :target: https://travis-ci.org/tonybaloney/sabat
+.. image:: https://img.shields.io/travis/tonybaloney/pysaba.svg
+        :target: https://travis-ci.org/tonybaloney/pysaba
 
-.. image:: https://readthedocs.org/projects/sabat/badge/?version=latest
-        :target: https://readthedocs.org/projects/sabat/?badge=latest
+.. image:: https://readthedocs.org/projects/pysaba/badge/?version=latest
+        :target: https://readthedocs.org/projects/pysaba/?badge=latest
         :alt: Documentation Status
 
 
-Sabat client library for API management
+Saba client library for API management
 
 * Free software: Apache-2 license
-* Documentation: https://sabat.readthedocs.org.
+* Documentation: https://pysaba.readthedocs.org.
 
 Features
 --------
 
-* Invitation management using the license API
-* User management using the license API
-* Team information
-* Invite URL generation
+* Certificate authentication
 
 Usage
 -----
 
 .. code-block:: python
 
-    from sabat.licensing import LicensingAPIClient
-
-    client = LicensingAPIClient(plan, api_key)
+    from saba.client import SabaClient
+    from saba.auth.certificate import CertificateAuthentication
     
-    invites = client.invites.get_all_invites()
+    host = 'mycompany-api.sabacloud.com'
+    user = 'me'
+    password = 'password'
+    
+    cert = CertificateAuthentication(host, user, password)
+    
+    client = SabaClient(host, cert)
+    
+    print(client.courses.all())
